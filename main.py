@@ -68,12 +68,12 @@ def customer_select(customers: str) ->str:
         choice = input("Izbor: ")
 
         if int(choice) <= num and int(choice) >= 1:
-            return (customers[int(choice)]['name'])
+            return (customers[int(choice)-1]['name'])
 
         else:
             print("Krivi izbor. Try Again.")
 
-def product_select(products: str) ->str:
+def product_select(products: str) ->list:
     new_offer_products = []
     new_offer_dict ={
     }
@@ -89,13 +89,17 @@ def product_select(products: str) ->str:
                 print(f"{index['id']}. Ime: {index['name']}. Opis: {index['description']}. Cijena: {index['price']}")
                 
             try:
-                choice = int(input("Izbor: "))
+                choice = int(input("Izbor: "))-1
             except:
                 print("Krivi izbor. Samo brojevi")
 
-            if int(choice) <= max_index and int(choice) >= 1:
+            if int(choice) <= max_index-1 and int(choice) >= 0:
                 while True:
-                    new_offer_dict = products[choice]
+                    #new_offer_dict = products[choice]
+                    new_offer_dict['product_id'] = products[choice]['id']
+                    new_offer_dict['product_name'] = products[choice]['name']
+                    new_offer_dict['description'] = products[choice]['description']
+                    new_offer_dict['price'] = products[choice]['price']
                     try:
                          new_offer_dict['quantity'] = int(input("Unesite kolicinu: "))
                     except:
@@ -115,10 +119,9 @@ def product_select(products: str) ->str:
             else:
                 print("Krivi izbor. Unesite broj unutar raspona..")
 
-def new_offer_append(offers: str, new_offer_customers: str, today_date: str, new_offer_products: str) ->None:
+def new_offer_append(offers: str, new_offer_customers: str, today_date: str, new_offer_products: str) ->dict:
     
     tax = 0.1
-    max_id = 0
     new_offer = {
         "offer_number": 0,
         "customer": "None",
@@ -145,7 +148,7 @@ def new_offer_append(offers: str, new_offer_customers: str, today_date: str, new
 
 
 # TODO: Implementirajte funkciju za upravljanje proizvodima.
-def manage_products(products: str) ->str:
+def manage_products(products: str) ->list:
     """
     Allows the user to add a new product or modify an existing product.
     """
@@ -257,7 +260,7 @@ def manage_products(products: str) ->str:
 
 
 # TODO: Implementirajte funkciju za upravljanje kupcima.
-def manage_customers(customers:str)->str:
+def manage_customers(customers:str)->list:
     """
     Allows the user to add a new customer or view all customers.
     """
@@ -324,14 +327,14 @@ def manage_customers(customers:str)->str:
 
 
 # TODO: Implementirajte funkciju za prikaz ponuda.
-def display_offers(offer: str)->None:
+def display_offers(offer: dict)->None:
     """
     Display all offers, offers for a selected month, or a single offer by ID.
     """
     # Omogućite izbor pregleda: sve ponude, po mjesecu ili pojedinačna ponuda
     # Prikaz relevantnih ponuda na temelju izbora
     while True:
-        print("Ponude\n1. Ispisi sve ponude.\n2. Ponude za odredjeni mjesec.\n3. Potrazi ponudu pomocu ID-a")
+        print("Ponude\n1. Ispisi sve ponude.\n2. Ponude za odredjeni mjesec.\n3. Potrazi ponudu pomocu ID-a\n4. Završi")
         choice = input("Izbor: ")
         if choice == '1':
             for index in offer:
@@ -355,6 +358,8 @@ def display_offers(offer: str)->None:
                         break
                     else:
                         print("Please try again.")
+        elif choice == '4':
+            break
                             
 
 

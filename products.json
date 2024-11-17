@@ -9,25 +9,19 @@
         "id": 2,
         "name": "Smartphone",
         "description": "6-inch display, 128GB storage",
-        "price": 500.0,
-        "quantity": 1,
-        "item_total": 500.0
+        "price": 500.0
     },
     {
         "id": 3,
         "name": "Headphones",
         "description": "Noise-canceling, wireless",
-        "price": 50.0,
-        "quantity": 2,
-        "item_total": 100.0
+        "price": 50.0
     },
     {
         "id": 4,
         "name": "Tablet",
         "description": "10-inch display, 64GB storage, WiFi",
-        "price": 300.0,
-        "quantity": 3,
-        "item_total": 900.0
+        "price": 300.0
     },
     {
         "id": 5,
